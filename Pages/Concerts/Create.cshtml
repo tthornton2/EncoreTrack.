@@ -1,0 +1,50 @@
+@page
+@model EncoreTrack.Pages_Concerts.CreateModel
+
+        @{
+        ViewData["Title"] = "Create";
+        }
+        
+        <!--header -->
+        <div class="text-center p-4" style="background-color: black;">
+            <img src="~/images/logo.png" alt="EncoreTrack Logo" style="height: 80px;" />
+            <h1 class="display-4" style="color: #FFD600;">EncoreTrack</h1>
+            <p style="color: white;">Create New Concert</p>
+        </div>
+ <!--cinfo-->
+
+    <h4>Concert</h4>
+    <hr />
+    <div class="row">
+    <div class="col-md-4">
+    <form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Concert.ConcertName" class="control-label"></label>
+                <input asp-for="Concert.ConcertName" class="form-control" />
+                <span asp-validation-for="Concert.ConcertName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Concert.ConcertDate" class="control-label"></label>
+                <input asp-for="Concert.ConcertDate" class="form-control" />
+                <span asp-validation-for="Concert.ConcertDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Concert.Venue" class="control-label"></label>
+                <input asp-for="Concert.Venue" class="form-control" />
+                <span asp-validation-for="Concert.Venue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+

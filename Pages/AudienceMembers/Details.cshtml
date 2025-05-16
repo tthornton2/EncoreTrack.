@@ -1,0 +1,86 @@
+@page
+@model EncoreTrack.Pages_AudienceMembers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>AudienceMember</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AudienceMember.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AudienceMember.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AudienceMember.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AudienceMember.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AudienceMember.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AudienceMember.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AudienceMember.FirstVisitDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AudienceMember.FirstVisitDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AudienceMember.Notes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AudienceMember.Notes)
+        </dd>
+    </dl>
+</div>
+<h4>Concert Visits</h4>
+
+@if (Model.AudienceMember.ConcertVisits != null && Model.AudienceMember.ConcertVisits.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Concert Name</th>
+                <th>Date</th>
+                <th>Venue</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var visit in Model.AudienceMember.ConcertVisits)
+        {
+            <tr>
+                <td>@visit.Concert?.ConcertName</td>
+                <td>@visit.Concert?.ConcertDate.ToShortDateString()</td>
+                <td>@visit.Concert?.Venue</td>
+                <td>
+                    <form method="post" asp-page-handler="DeleteVisit" asp-route-id="@Model.AudienceMember.AudienceMemberID" asp-route-visitId="@visit.ConcertVisitID">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>This patron has not attended any concerts yet.</p>
+}
+
+<a asp-page="/ConcertVisits/Create" asp-route-audienceMemberId="@Model.AudienceMember.AudienceMemberID" class="btn btn-primary">Add Concert Visit</a>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.AudienceMember.AudienceMemberID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

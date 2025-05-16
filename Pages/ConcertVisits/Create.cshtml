@@ -1,0 +1,26 @@
+@page "{audienceMemberId:int?}"
+@model EncoreTrack.Pages.ConcertVisits.CreateModel
+@{
+    ViewData["Title"] = "Add Concert Visit";
+}
+
+<!--cvinp-->
+
+        <h1>Add Concert Visit for @Model.AudienceMember?.FullName</h1>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="ConcertVisit.ConcertID"></label>
+                <select asp-for="ConcertVisit.ConcertID" class="form-control" asp-items="Model.ConcertList"></select>
+                <span asp-validation-for="ConcertVisit.ConcertID" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="ConcertVisit.AudienceMemberID" />
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-page="/AudienceMembers/Details" asp-route-id="@Model.ConcertVisit.AudienceMemberID" class="btn btn-secondary">Cancel</a>
+        </form>
+
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }

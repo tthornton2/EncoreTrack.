@@ -1,0 +1,57 @@
+@page
+@model EncoreTrack.Pages_AudienceMembers.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>AudienceMember</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AudienceMember.AudienceMemberID" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="AudienceMember.FullName" class="control-label"></label>
+                <input asp-for="AudienceMember.FullName" class="form-control" />
+                <span asp-validation-for="AudienceMember.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="AudienceMember.Email" class="control-label"></label>
+                <input asp-for="AudienceMember.Email" class="form-control" />
+                <span asp-validation-for="AudienceMember.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="AudienceMember.PhoneNumber" class="control-label"></label>
+                <input asp-for="AudienceMember.PhoneNumber" class="form-control" />
+                <span asp-validation-for="AudienceMember.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="AudienceMember.FirstVisitDate" class="control-label"></label>
+                <input asp-for="AudienceMember.FirstVisitDate" class="form-control" />
+                <span asp-validation-for="AudienceMember.FirstVisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="AudienceMember.Notes" class="control-label"></label>
+                <input asp-for="AudienceMember.Notes" class="form-control" />
+                <span asp-validation-for="AudienceMember.Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+

@@ -1,0 +1,103 @@
+@page
+@model EncoreTrack.Pages.AudienceMembers.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--header -->
+        <div class="text-center p-4" style="background-color: black;">
+            <img src="~/images/logo.png" alt="EncoreTrack Logo" style="height: 80px;" />
+            <h1 class="display-4" style="color: #FFD600;">EncoreTrack</h1>
+            <p style="color: white;">Create New Patron"></a></p>
+        </div>
+
+<!--search-->
+            <h1>Index</h1>
+            <form method="get" class="form-inline mb-3">
+                <div class="input-group">
+                    <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search patrons..." />
+                    <div class="input-group-append">
+                        <button class="btn btn-dark" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+
+            <p>
+                <a asp-page="Create">Create New</a>
+            </p>
+
+<!--sort-->
+                <a asp-page="./Index"
+                asp-route-SortOrder="@(Model.SortOrder == "name_desc" ? "" : "name_desc")"
+                asp-route-SearchString="@Model.SearchString"
+                asp-route-PageNumber="@Model.CurrentPage"
+                class="btn btn-outline-dark mb-3">
+                    Sort by Name @(Model.SortOrder == "name_desc" ? "↑" : "↓")
+                </a>
+
+<!--t/fields-->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.AudienceMember[0].FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.AudienceMember[0].Email)</th>
+                <th>@Html.DisplayNameFor(model => model.AudienceMember[0].PhoneNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.AudienceMember[0].FirstVisitDate)</th>
+                <th>@Html.DisplayNameFor(model => model.AudienceMember[0].Notes)</th>
+                <th></th>
+            </tr>
+            </thead>
+        <tbody>
+
+        @foreach (var item in Model.AudienceMember) {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.FirstVisitDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Notes)</td> 
+
+<!--count-->
+                <td>
+                    @if (item.ConcertVisits?.Count > 0)
+                    {
+                        @for (int i = 0; i < item.ConcertVisits.Count; i++)
+                        {
+                            <span title="Concert Visit">*</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-muted">(none)</span>
+                    }
+                </td>
+
+<!--o-->
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.AudienceMemberID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.AudienceMemberID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.AudienceMemberID">Delete</a>
+                </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+
+<!--paging-->
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" asp-route-SearchString="@Model.SearchString" asp-route-PageNumber="@(Model.CurrentPage - 1)">Previous</a>
+                </li>
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link" asp-route-SearchString="@Model.SearchString" asp-route-PageNumber="@i">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" asp-route-SearchString="@Model.SearchString" asp-route-PageNumber="@(Model.CurrentPage + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>

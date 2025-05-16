@@ -1,0 +1,38 @@
+@page
+@model EncoreTrack.Pages.Concerts.IndexModel
+@{
+    ViewData["Title"] = "Concerts";
+}
+<!--head-->
+        <div class="text-center p-4" style="background-color: black;">
+            <img src="~/images/logo.png" alt="EncoreTrack Logo" style="height: 80px;" />
+            <h1 class="display-4" style="color: #FFD600;">All Concerts</h1>
+            <p style="color: white;">Review and manage concert records</p>
+        </div>
+
+        <div class="container mt-5">
+            <a asp-page="Create" class="btn btn-dark mb-4">Add New Concert</a>
+
+<!--c&c-->
+            <div class="row">
+                @foreach (var concert in Model.Concert)
+                {
+                <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                                <h5 class="card-title" style="color: #FFD600;">@concert.ConcertName</h5>
+                                    <p class="card-text">
+                                        <strong>Date:</strong> @concert.ConcertDate.ToString("MMMM d, yyyy")<br />
+                                        <strong>Venue:</strong> @concert.Venue
+                                    </p>
+<!--eddb-->                              
+                            <a asp-page="Edit" asp-route-id="@concert.ConcertID" class="btn btn-outline-secondary btn-sm">Edit</a>
+                            <a asp-page="Details" asp-route-id="@concert.ConcertID" class="btn btn-outline-secondary btn-sm">Details</a>
+                            <a asp-page="Delete" asp-route-id="@concert.ConcertID" class="btn btn-outline-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+

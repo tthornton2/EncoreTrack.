@@ -1,0 +1,28 @@
+@page
+@model EncoreTrack.Pages_Concerts.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<!--dopdis-->
+        <h1>Delete</h1>
+
+        <h3>Are you sure you want to delete?</h3>
+        <div>
+            <h4>Concert</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Concert.ConcertName)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Concert.ConcertName)</dd>
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Concert.ConcertDate)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Concert.ConcertDate)</dd>
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Concert.Venue)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Concert.Venue)</dd>
+            </dl>
+            
+            <form method="post">
+                <input type="hidden" asp-for="Concert.ConcertID" />
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-page="./Index">Back to List</a>
+            </form>
+        </div>
